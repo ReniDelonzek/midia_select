@@ -378,11 +378,9 @@ packages:
   msk_utils:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "5beaafedb609e714171418ad19504db0e609c278"
-      url: "git@github.com:ReniDelonzek/msk_utils.git"
-    source: git
+      path: "/Users/reni/Downloads/Projetos/MSK/flutter/msk_plugin/msk_utils"
+      relative: false
+    source: path
     version: "0.0.1"
   node_interop:
     dependency: transitive
@@ -447,13 +445,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.0"
-  pinch_zoom_image:
+  pinch_zoom_image_last:
     dependency: "direct main"
     description:
-      name: pinch_zoom_image
+      name: pinch_zoom_image_last
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.5"
+    version: "0.3.1"
   platform:
     dependency: transitive
     description:
@@ -612,7 +610,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.15"
+    version: "0.2.16"
   timing:
     dependency: transitive
     description:

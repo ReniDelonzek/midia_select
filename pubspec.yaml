@@ -9,14 +9,14 @@ environment:
 
 dependencies:
   msk_utils:
-    #path: /Users/reni/Downloads/Projetos/MSK/flutter/msk_plugin/msk_utils
-    git:
-      url: git@github.com:ReniDelonzek/msk_utils.git
-      version: 0.2
+    path: /Users/reni/Downloads/Projetos/MSK/flutter/msk_plugin/msk_utils
+    #git:
+      #url: git@github.com:ReniDelonzek/msk_utils.git
+      #version: 0.2
 
   image_picker: ^0.6.6+1
   flutter_mobx: ^0.3.3+3
-  pinch_zoom_image: ^0.2.5
+  pinch_zoom_image_last: ^0.3.1
   carousel_slider: ^2.1.0
   cached_network_image: ^2.2.0+1
   mobx: ^0.3.9+3

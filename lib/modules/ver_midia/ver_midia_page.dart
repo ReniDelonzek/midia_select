@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:midia_select/models/item_midia.dart';
 import 'package:msk_utils/utils/utils_platform.dart';
 import 'package:msk_utils/extensions/string.dart';
-import 'package:pinch_zoom_image/pinch_zoom_image.dart';
+import 'package:pinch_zoom_image_last/pinch_zoom_image_last.dart';
 
 import 'ver_midia_controller.dart';
 import 'ver_midia_module.dart';
