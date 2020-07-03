@@ -113,6 +113,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  characters:
+    dependency: transitive
+    description:
+      name: characters
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   charcode:
     dependency: transitive
     description:
@@ -378,9 +385,11 @@ packages:
   msk_utils:
     dependency: "direct main"
     description:
-      path: "/Users/reni/Downloads/Projetos/MSK/flutter/msk_plugin/msk_utils"
-      relative: false
-    source: path
+      path: "."
+      ref: ddc9e9ce12ff21073189c0844ccc133bf973718f
+      resolved-ref: ddc9e9ce12ff21073189c0844ccc133bf973718f
+      url: "git@github.com:ReniDelonzek/msk_utils.git"
+    source: git
     version: "0.0.1"
   node_interop:
     dependency: transitive
@@ -409,7 +418,7 @@ packages:
       name: package_info
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.0+18"
+    version: "0.4.1"
   path:
     dependency: transitive
     description:
@@ -668,5 +677,5 @@ packages:
     source: hosted
     version: "2.2.1"
 sdks:
-  dart: ">=2.7.0 <3.0.0"
+  dart: ">=2.9.0-14.0.dev <3.0.0"
   flutter: ">=1.12.13+hotfix.5 <2.0.0"
