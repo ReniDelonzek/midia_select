@@ -32,7 +32,7 @@ class SeletorMidiaWidget extends StatelessWidget {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           Container(
-            height: 200,
+            height: 205,
             child: Observer(builder: (_) {
               if (controller.midia
                   .where((element) => !element.deletado)

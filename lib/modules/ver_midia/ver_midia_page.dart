@@ -74,7 +74,7 @@ class _VerMidiaPageState extends State<VerMidiaPage> {
         return PinchZoomImage(
           image: item.url.isNullOrBlank
               ? Image.file(File(item.path))
-              : UtilsPlatform.isWeb()
+              : (UtilsPlatform.isWeb() || UtilsPlatform.isWindows())
                   ? Image.network(item.url)
                   : CachedNetworkImage(
                       imageUrl: item.url,

@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:midia_select/models/item_midia.dart';
+import 'package:msk_utils/utils/utils_platform.dart';
 
 import 'item_midia_controller.dart';
 
@@ -93,14 +94,22 @@ class ItemMidiaWidget extends StatelessWidget {
 
   _getImagem() {
     if (controller.item.url?.isNotEmpty == true) {
-      return CachedNetworkImage(
-        width: WIDTH,
-        height: HEIGHT,
-        fit: BoxFit.cover,
-        placeholder: (context, url) =>
-            Center(child: CircularProgressIndicator()),
-        imageUrl: controller.item.url,
-      );
+      if (UtilsPlatform.isWindows() || UtilsPlatform.isWeb()) {
+        return Image.network(
+          controller.item.url,
+          width: WIDTH,
+          height: HEIGHT,
+          fit: BoxFit.cover,
+        );
+      } else
+        return CachedNetworkImage(
+          width: WIDTH,
+          height: HEIGHT,
+          fit: BoxFit.cover,
+          placeholder: (context, url) =>
+              Center(child: CircularProgressIndicator()),
+          imageUrl: controller.item.url,
+        );
     } else {
       return Image.file(File(controller.item?.path),
           fit: BoxFit.cover, width: 110, height: 140);
