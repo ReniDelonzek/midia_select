@@ -52,10 +52,9 @@ class ItemMidiaWidget extends StatelessWidget {
                       overflow: TextOverflow.clip,
                       maxLines: 2,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: controller.item.deletado
-                              ? Colors.red
-                              : Colors.black),
+                      style: controller.item.deletado
+                          ? TextStyle(color: Colors.red)
+                          : null,
                     ),
                   )
                 ],
