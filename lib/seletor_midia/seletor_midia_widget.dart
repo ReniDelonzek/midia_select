@@ -13,10 +13,12 @@ class SeletorMidiaWidget extends StatelessWidget {
   final List<TipoMidiaEnum> tiposMidia;
   final double maxWidth;
   final double maxHeight;
+  final Widget title;
 
   const SeletorMidiaWidget(this.controller,
       {this.maxWidth,
       this.maxHeight,
+      this.title,
       this.tiposMidia = const [TipoMidiaEnum.IMAGEM]});
 
   @override
@@ -27,10 +29,11 @@ class SeletorMidiaWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            'Adicione arquivos aqui',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
+          (title ??
+              Text(
+                'Adicione arquivos aqui',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              )),
           Container(
             height: 205,
             child: Observer(builder: (_) {
