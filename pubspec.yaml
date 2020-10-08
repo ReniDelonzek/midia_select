@@ -17,7 +17,7 @@ dependencies:
   image_picker: ^0.6.6+1
   flutter_mobx: ^0.3.3+3
   pinch_zoom_image_last: ^0.3.1
-  carousel_slider: ^2.1.0
+  carousel_slider: ^2.3.1
   cached_network_image: ^2.2.0+1
   mobx: ^0.3.9+3
   bloc_pattern: ^2.5.1
