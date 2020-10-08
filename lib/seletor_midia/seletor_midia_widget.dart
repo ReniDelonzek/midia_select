@@ -24,7 +24,6 @@ class SeletorMidiaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 320,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
