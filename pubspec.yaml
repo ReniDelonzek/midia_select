@@ -3,6 +3,7 @@ description: A new Flutter package project.
 version: 0.0.1
 author:
 homepage:
+publish_to: 'none'
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -12,7 +13,7 @@ dependencies:
     #path: /Users/reni/Downloads/Projetos/MSK/flutter/msk_plugin/msk_utils
     git:
       url: git@github.com:ReniDelonzek/msk_utils.git
-      ref: b92f09cb908ca77f5561df621802eca7ac1b69d4
+      ref: 1ff097b6889f1aa2ed532f88b7f31c2b907699be
 
   image_picker: ^0.6.6+1
   flutter_mobx: ^0.3.3+3
