@@ -144,80 +144,80 @@ class SeletorMidiaWidget extends StatelessWidget {
   void _exibirOpcoesFoto(BuildContext context) {
     showDialog(
         context: context,
-        child: AlertDialog(
-          title: Text('Selecione a forma'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ListTile(
-                title: Text('Câmera'),
-                leading: Icon(Icons.camera),
-                onTap: () async {
-                  if (Navigator.canPop(context)) {
-                    Navigator.pop(context);
-                  }
-                  var image = await ImagePicker.pickImage(
-                      source: ImageSource.camera,
-                      maxWidth: maxWidth,
-                      maxHeight: maxHeight);
-                  controller.addFoto(image);
-                },
-              ),
-              ListTile(
-                title: Text('Galeria'),
-                leading: Icon(Icons.image),
-                onTap: () async {
-                  if (Navigator.canPop(context)) {
-                    Navigator.pop(context);
-                  }
-                  var image = await ImagePicker.pickImage(
-                      source: ImageSource.gallery,
-                      maxWidth: maxWidth,
-                      maxHeight: maxHeight);
+        builder: (context) => AlertDialog(
+              title: Text('Selecione a forma'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    title: Text('Câmera'),
+                    leading: Icon(Icons.camera),
+                    onTap: () async {
+                      if (Navigator.canPop(context)) {
+                        Navigator.pop(context);
+                      }
+                      var image = await ImagePicker.pickImage(
+                          source: ImageSource.camera,
+                          maxWidth: maxWidth,
+                          maxHeight: maxHeight);
+                      controller.addFoto(image);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('Galeria'),
+                    leading: Icon(Icons.image),
+                    onTap: () async {
+                      if (Navigator.canPop(context)) {
+                        Navigator.pop(context);
+                      }
+                      var image = await ImagePicker.pickImage(
+                          source: ImageSource.gallery,
+                          maxWidth: maxWidth,
+                          maxHeight: maxHeight);
 
-                  controller.addFoto(image);
-                },
+                      controller.addFoto(image);
+                    },
+                  ),
+                ],
               ),
-            ],
-          ),
-        ));
+            ));
   }
 
   void _exibirOpcoesVideo(BuildContext context) {
     showDialog(
         context: context,
-        child: AlertDialog(
-          title: Text('Selecione a forma'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ListTile(
-                title: Text('Câmera'),
-                leading: Icon(Icons.camera),
-                onTap: () async {
-                  if (Navigator.canPop(context)) {
-                    Navigator.pop(context);
-                  }
-                  var image =
-                      await ImagePicker.pickVideo(source: ImageSource.camera);
-                  controller.addVideo(image);
-                },
+        builder: (context) => AlertDialog(
+              title: Text('Selecione a forma'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    title: Text('Câmera'),
+                    leading: Icon(Icons.camera),
+                    onTap: () async {
+                      if (Navigator.canPop(context)) {
+                        Navigator.pop(context);
+                      }
+                      var image = await ImagePicker.pickVideo(
+                          source: ImageSource.camera);
+                      controller.addVideo(image);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('Galeria'),
+                    leading: Icon(Icons.image),
+                    onTap: () async {
+                      if (Navigator.canPop(context)) {
+                        Navigator.pop(context);
+                      }
+                      var image = await ImagePicker.pickVideo(
+                          source: ImageSource.gallery);
+                      controller.addVideo(image);
+                    },
+                  ),
+                ],
               ),
-              ListTile(
-                title: Text('Galeria'),
-                leading: Icon(Icons.image),
-                onTap: () async {
-                  if (Navigator.canPop(context)) {
-                    Navigator.pop(context);
-                  }
-                  var image =
-                      await ImagePicker.pickVideo(source: ImageSource.gallery);
-                  controller.addVideo(image);
-                },
-              ),
-            ],
-          ),
-        ));
+            ));
   }
 
   _exibirOpcoesItem(BuildContext context, int pos) {
