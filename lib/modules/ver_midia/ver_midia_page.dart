@@ -71,6 +71,9 @@ class _VerMidiaPageState extends State<VerMidiaPage> {
   _getItemMidia(ItemMidia item) {
     switch (item.tipoMidia) {
       case TipoMidiaEnum.IMAGEM:
+        if (item.url.isNullOrBlank && item.path.isNullOrBlank) {
+          return Text('Falha ao carregar imagem');
+        }
         return PinchZoomImage(
           image: item.url.isNullOrBlank
               ? Image.file(File(item.path))
