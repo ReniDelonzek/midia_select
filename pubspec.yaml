@@ -15,7 +15,7 @@ dependencies:
       url: git@github.com:ReniDelonzek/msk_utils.git
       ref: 0a70e6870ab44034fdbe1ca8e3dea3ba1a324ef3
 
-  image_picker: ^0.6.6+1
+  image_picker: ^0.6.7+22
   flutter_mobx: ^0.3.3+3
   pinch_zoom_image_last: ^0.3.1
   carousel_slider: ^2.3.1
