@@ -35,7 +35,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.5.0"
+    version: "2.6.1"
   bloc_pattern:
     dependency: "direct main"
     description:
@@ -420,11 +420,9 @@ packages:
   msk_utils:
     dependency: "direct main"
     description:
-      path: "."
-      ref: "0a70e6870ab44034fdbe1ca8e3dea3ba1a324ef3"
-      resolved-ref: "0a70e6870ab44034fdbe1ca8e3dea3ba1a324ef3"
-      url: "git@github.com:ReniDelonzek/msk_utils.git"
-    source: git
+      path: "C:\\Users\\reni\\Downloads\\Projetos\\agro\\libs\\msk_utils"
+      relative: false
+    source: path
     version: "0.0.1"
   node_interop:
     dependency: transitive
@@ -689,7 +687,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.19"
+    version: "0.3.0"
   timing:
     dependency: transitive
     description:

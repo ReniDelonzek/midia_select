@@ -94,7 +94,7 @@ class ItemMidiaWidget extends StatelessWidget {
 
   _getImagem() {
     if (controller.item.url?.isNotEmpty == true) {
-      if (UtilsPlatform.isWindows() || UtilsPlatform.isWeb()) {
+      if (UtilsPlatform.isWindows || UtilsPlatform.isWeb) {
         return Image.network(
           controller.item.url,
           width: WIDTH,
