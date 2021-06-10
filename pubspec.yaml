@@ -14,7 +14,7 @@ dependencies:
     #path: /Users/reni/Downloads/Projetos/MSK/flutter/msk_plugin/msk_utils
     git:
       url: git@github.com:ReniDelonzek/msk_utils.git
-      ref: d6225afd1822421a32e368844b33ce3927d151d7
+      ref: f9a8202a02fc8249614e61964785323acc6586df
 
   image_picker: ^0.6.7+22
   flutter_mobx: ^0.3.3+3
