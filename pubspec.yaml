@@ -10,11 +10,11 @@ environment:
 
 dependencies:
   msk_utils:
-    path: C:\Users\reni\Downloads\Projetos\agro\libs\msk_utils
+    #path: "C:/Users/reni/Downloads/Projetos/agro/libs/msk_utils"
     #path: /Users/reni/Downloads/Projetos/MSK/flutter/msk_plugin/msk_utils
-    #git:
-     # url: git@github.com:ReniDelonzek/msk_utils.git
-      #ref: 0a70e6870ab44034fdbe1ca8e3dea3ba1a324ef3
+    git:
+      url: git@github.com:ReniDelonzek/msk_utils.git
+      ref: d6225afd1822421a32e368844b33ce3927d151d7
 
   image_picker: ^0.6.7+22
   flutter_mobx: ^0.3.3+3
