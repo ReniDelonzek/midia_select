@@ -423,7 +423,7 @@ packages:
       path: "."
       ref: "8c4d7ab378b853e6ea732121c14e76dee7741e14"
       resolved-ref: "8c4d7ab378b853e6ea732121c14e76dee7741e14"
-      url: "git@github.com:ReniDelonzek/msk_utils.git"
+      url: "https://github.com/ReniDelonzek/msk_utils.git"
     source: git
     version: "0.0.1"
   node_interop:
