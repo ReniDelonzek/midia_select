@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:midia_select/models/item_midia.dart';
 import 'package:mobx/mobx.dart';
 import 'package:path/path.dart';
@@ -17,24 +15,24 @@ abstract class _SeletorMidiaBase with Store {
   ObservableList<ItemMidia> midia = ObservableList();
 
   @action
-  addFoto(File file) {
-    if (file != null) {
+  addFoto(String path) {
+    if (path != null) {
       ItemMidia item = ItemMidia();
       item.strings = Map();
-      item.strings['file'] = basename(file.absolute.path);
-      item.path = file.absolute.path;
+      item.strings['file'] = basename(path);
+      item.path = path;
       item.tipoMidia = TipoMidiaEnum.IMAGEM;
       midia.add(item);
     }
   }
 
   @action
-  addVideo(File file) {
-    if (file != null) {
+  addVideo(String path) {
+    if (path != null) {
       ItemMidia item = ItemMidia();
       item.strings = Map();
-      item.strings['file'] = basename(file.absolute.path);
-      item.path = file.absolute.path;
+      item.strings['file'] = basename(path);
+      item.path = path;
       item.tipoMidia = TipoMidiaEnum.VIDEO;
       midia.add(item);
     }

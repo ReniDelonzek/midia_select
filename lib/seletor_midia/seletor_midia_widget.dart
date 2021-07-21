@@ -1,9 +1,11 @@
+import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:midia_select/item_midia/item_midia_widget.dart';
 import 'package:midia_select/models/item_midia.dart';
 import 'package:midia_select/modules/ver_midia/ver_midia_module.dart';
+import 'package:msk_utils/msk_utils.dart';
 import 'package:msk_utils/utils/navigation.dart';
 
 import 'seletor_midia_controller.dart';
@@ -141,83 +143,119 @@ class SeletorMidiaWidget extends StatelessWidget {
     }
   }
 
-  void _exibirOpcoesFoto(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text('Selecione a forma'),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    title: Text('Câmera'),
-                    leading: Icon(Icons.camera),
-                    onTap: () async {
-                      if (Navigator.canPop(context)) {
-                        Navigator.pop(context);
-                      }
-                      var image = await ImagePicker.pickImage(
-                          source: ImageSource.camera,
-                          maxWidth: maxWidth,
-                          maxHeight: maxHeight);
-                      controller.addFoto(image);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Galeria'),
-                    leading: Icon(Icons.image),
-                    onTap: () async {
-                      if (Navigator.canPop(context)) {
-                        Navigator.pop(context);
-                      }
-                      var image = await ImagePicker.pickImage(
-                          source: ImageSource.gallery,
-                          maxWidth: maxWidth,
-                          maxHeight: maxHeight);
+  Future<void> _exibirOpcoesFoto(BuildContext context) async {
+    if (!UtilsPlatform.isMobile) {
+      try {
+        String ex = 'jpg, png, jpeg';
+        FilePickerCross filePickerCross =
+            await FilePickerCross.importFromStorage(
+                type: FileTypeCross.image, fileExtension: ex);
+        if (filePickerCross != null) {
+          String path = filePickerCross.path;
+          if (UtilsPlatform.isMacos) {
+            // Corrige nomes dos arquivos errados
 
-                      controller.addFoto(image);
-                    },
-                  ),
-                ],
-              ),
-            ));
+            path = filePickerCross.path.replaceAll(ex, '');
+          }
+          controller.addFoto(path);
+        }
+      } catch (_) {}
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text('Selecione a forma'),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListTile(
+                      title: Text('Câmera'),
+                      leading: Icon(Icons.camera),
+                      onTap: () async {
+                        if (Navigator.canPop(context)) {
+                          Navigator.pop(context);
+                        }
+                        PickedFile image = await ImagePicker().getImage(
+                            source: ImageSource.camera,
+                            maxWidth: maxWidth,
+                            maxHeight: maxHeight);
+                        controller.addFoto(image?.path);
+                      },
+                    ),
+                    ListTile(
+                      title: Text('Galeria'),
+                      leading: Icon(Icons.image),
+                      onTap: () async {
+                        if (Navigator.canPop(context)) {
+                          Navigator.pop(context);
+                        }
+                        PickedFile image = await ImagePicker().getImage(
+                            source: ImageSource.gallery,
+                            maxWidth: maxWidth,
+                            maxHeight: maxHeight);
+
+                        controller.addFoto(image?.path);
+                      },
+                    ),
+                  ],
+                ),
+              ));
+    }
   }
 
-  void _exibirOpcoesVideo(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text('Selecione a forma'),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    title: Text('Câmera'),
-                    leading: Icon(Icons.camera),
-                    onTap: () async {
-                      if (Navigator.canPop(context)) {
-                        Navigator.pop(context);
-                      }
-                      var image = await ImagePicker.pickVideo(
-                          source: ImageSource.camera);
-                      controller.addVideo(image);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Galeria'),
-                    leading: Icon(Icons.image),
-                    onTap: () async {
-                      if (Navigator.canPop(context)) {
-                        Navigator.pop(context);
-                      }
-                      var image = await ImagePicker.pickVideo(
-                          source: ImageSource.gallery);
-                      controller.addVideo(image);
-                    },
-                  ),
-                ],
-              ),
-            ));
+  Future<void> _exibirOpcoesVideo(BuildContext context) async {
+    if (!UtilsPlatform.isMobile) {
+      try {
+        String ex = 'mp4, mov, 3gp';
+        FilePickerCross filePickerCross =
+            await FilePickerCross.importFromStorage(
+                type: FileTypeCross.image, fileExtension: ex);
+        if (filePickerCross != null) {
+          String path = filePickerCross.path;
+          if (UtilsPlatform.isMacos) {
+            // Corrige nomes dos arquivos errados
+
+            path = filePickerCross.path.replaceAll(ex, '');
+          }
+          controller.addFoto(path);
+        }
+      } catch (_) {}
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text('Selecione a forma'),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListTile(
+                      title: Text('Câmera'),
+                      leading: Icon(Icons.camera),
+                      onTap: () async {
+                        if (Navigator.canPop(context)) {
+                          Navigator.pop(context);
+                        }
+                        PickedFile video = await ImagePicker()
+                            .getVideo(source: ImageSource.camera);
+                        controller.addVideo(video?.path);
+                      },
+                    ),
+                    ListTile(
+                      title: Text('Galeria'),
+                      leading: Icon(Icons.image),
+                      onTap: () async {
+                        if (Navigator.canPop(context)) {
+                          Navigator.pop(context);
+                        }
+                        PickedFile video = await ImagePicker()
+                            .getVideo(source: ImageSource.gallery);
+                        controller.addVideo(video?.path);
+                      },
+                    ),
+                  ],
+                ),
+              ));
+    }
   }
 
   _exibirOpcoesItem(BuildContext context, int pos) {

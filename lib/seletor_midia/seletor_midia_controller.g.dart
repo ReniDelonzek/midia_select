@@ -6,78 +6,74 @@ part of 'seletor_midia_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SeletorMidiaController on _SeletorMidiaBase, Store {
   final _$tempoGravacaoAtom = Atom(name: '_SeletorMidiaBase.tempoGravacao');
 
   @override
   int get tempoGravacao {
-    _$tempoGravacaoAtom.context.enforceReadPolicy(_$tempoGravacaoAtom);
-    _$tempoGravacaoAtom.reportObserved();
+    _$tempoGravacaoAtom.reportRead();
     return super.tempoGravacao;
   }
 
   @override
   set tempoGravacao(int value) {
-    _$tempoGravacaoAtom.context.conditionallyRunInAction(() {
+    _$tempoGravacaoAtom.reportWrite(value, super.tempoGravacao, () {
       super.tempoGravacao = value;
-      _$tempoGravacaoAtom.reportChanged();
-    }, _$tempoGravacaoAtom, name: '${_$tempoGravacaoAtom.name}_set');
+    });
   }
 
   final _$gravandoAtom = Atom(name: '_SeletorMidiaBase.gravando');
 
   @override
   bool get gravando {
-    _$gravandoAtom.context.enforceReadPolicy(_$gravandoAtom);
-    _$gravandoAtom.reportObserved();
+    _$gravandoAtom.reportRead();
     return super.gravando;
   }
 
   @override
   set gravando(bool value) {
-    _$gravandoAtom.context.conditionallyRunInAction(() {
+    _$gravandoAtom.reportWrite(value, super.gravando, () {
       super.gravando = value;
-      _$gravandoAtom.reportChanged();
-    }, _$gravandoAtom, name: '${_$gravandoAtom.name}_set');
+    });
   }
 
   final _$midiaAtom = Atom(name: '_SeletorMidiaBase.midia');
 
   @override
   ObservableList<ItemMidia> get midia {
-    _$midiaAtom.context.enforceReadPolicy(_$midiaAtom);
-    _$midiaAtom.reportObserved();
+    _$midiaAtom.reportRead();
     return super.midia;
   }
 
   @override
   set midia(ObservableList<ItemMidia> value) {
-    _$midiaAtom.context.conditionallyRunInAction(() {
+    _$midiaAtom.reportWrite(value, super.midia, () {
       super.midia = value;
-      _$midiaAtom.reportChanged();
-    }, _$midiaAtom, name: '${_$midiaAtom.name}_set');
+    });
   }
 
   final _$_SeletorMidiaBaseActionController =
       ActionController(name: '_SeletorMidiaBase');
 
   @override
-  dynamic addFoto(File file) {
-    final _$actionInfo = _$_SeletorMidiaBaseActionController.startAction();
+  dynamic addFoto(String path) {
+    final _$actionInfo = _$_SeletorMidiaBaseActionController.startAction(
+        name: '_SeletorMidiaBase.addFoto');
     try {
-      return super.addFoto(file);
+      return super.addFoto(path);
     } finally {
       _$_SeletorMidiaBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic addVideo(File file) {
-    final _$actionInfo = _$_SeletorMidiaBaseActionController.startAction();
+  dynamic addVideo(String path) {
+    final _$actionInfo = _$_SeletorMidiaBaseActionController.startAction(
+        name: '_SeletorMidiaBase.addVideo');
     try {
-      return super.addVideo(file);
+      return super.addVideo(path);
     } finally {
       _$_SeletorMidiaBaseActionController.endAction(_$actionInfo);
     }
@@ -85,11 +81,21 @@ mixin _$SeletorMidiaController on _SeletorMidiaBase, Store {
 
   @override
   dynamic addAudio(String path) {
-    final _$actionInfo = _$_SeletorMidiaBaseActionController.startAction();
+    final _$actionInfo = _$_SeletorMidiaBaseActionController.startAction(
+        name: '_SeletorMidiaBase.addAudio');
     try {
       return super.addAudio(path);
     } finally {
       _$_SeletorMidiaBaseActionController.endAction(_$actionInfo);
     }
+  }
+
+  @override
+  String toString() {
+    return '''
+tempoGravacao: ${tempoGravacao},
+gravando: ${gravando},
+midia: ${midia}
+    ''';
   }
 }

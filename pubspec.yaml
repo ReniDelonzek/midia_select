@@ -9,6 +9,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  file_picker_cross: ^4.2.2
   msk_utils:
     #path: "C:/Users/reni/Downloads/Projetos/agro/libs/msk_utils"
     #path: /Users/reni/Downloads/Projetos/MSK/flutter/msk_plugin/msk_utils
@@ -21,16 +22,22 @@ dependencies:
   pinch_zoom_image_last: ^0.3.1
   carousel_slider: ^2.3.1
   cached_network_image: ^2.2.0+1
-  mobx: ^0.3.9+3
+  mobx: ^1.1.0
   bloc_pattern: ^2.5.1
   flutter:
     sdk: flutter
 
 dev_dependencies: 
-  build_runner: ^1.10.0
-  mobx_codegen: ^0.3.10+1
+  build_runner: ^1.10.3
+  mobx_codegen: ^1.1.2
   flutter_test:
     sdk: flutter
+
+dependency_overrides:
+  path_provider: ^2.0.1 
+  mobx_codegen: ^1.1.2
+  mobx: ^1.1.0
+  flutter_mobx: ^1.1.0+2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
