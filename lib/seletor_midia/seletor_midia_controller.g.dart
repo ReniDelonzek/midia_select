@@ -54,42 +54,6 @@ mixin _$SeletorMidiaController on _SeletorMidiaBase, Store {
     });
   }
 
-  final _$_SeletorMidiaBaseActionController =
-      ActionController(name: '_SeletorMidiaBase');
-
-  @override
-  dynamic addFoto(String path) {
-    final _$actionInfo = _$_SeletorMidiaBaseActionController.startAction(
-        name: '_SeletorMidiaBase.addFoto');
-    try {
-      return super.addFoto(path);
-    } finally {
-      _$_SeletorMidiaBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic addVideo(String path) {
-    final _$actionInfo = _$_SeletorMidiaBaseActionController.startAction(
-        name: '_SeletorMidiaBase.addVideo');
-    try {
-      return super.addVideo(path);
-    } finally {
-      _$_SeletorMidiaBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic addAudio(String path) {
-    final _$actionInfo = _$_SeletorMidiaBaseActionController.startAction(
-        name: '_SeletorMidiaBase.addAudio');
-    try {
-      return super.addAudio(path);
-    } finally {
-      _$_SeletorMidiaBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''

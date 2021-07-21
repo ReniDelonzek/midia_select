@@ -34,7 +34,7 @@ class ItemMidiaWidget extends StatelessWidget {
                     width: 110,
                     height: 140,
                     child: Stack(children: [
-                      _getMidia(),
+                      Container(width: 110, height: 180, child: _getMidia()),
                       Container(
                         width: 110,
                         height: 140,
@@ -106,13 +106,16 @@ class ItemMidiaWidget extends StatelessWidget {
           width: WIDTH,
           height: HEIGHT,
           fit: BoxFit.cover,
+          errorWidget: (_, _a, _b) {
+            return Text('Falha ao carregar imagem');
+          },
           placeholder: (context, url) =>
               Center(child: CircularProgressIndicator()),
           imageUrl: controller.item.url,
         );
     } else {
       return Image.file(File(controller.item?.path),
-          fit: BoxFit.cover, width: 110, height: 140);
+          fit: BoxFit.cover, width: WIDTH, height: HEIGHT);
     }
   }
 }

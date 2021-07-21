@@ -16,12 +16,16 @@ class SeletorMidiaWidget extends StatelessWidget {
   final double maxWidth;
   final double maxHeight;
   final Widget title;
+  final Function(ItemMidia) mediaAdded;
+  final Function(int) mediaExcluded;
 
   const SeletorMidiaWidget(this.controller,
       {this.maxWidth,
       this.maxHeight,
       this.title,
-      this.tiposMidia = const [TipoMidiaEnum.IMAGEM]});
+      this.tiposMidia = const [TipoMidiaEnum.IMAGEM],
+      this.mediaAdded,
+      this.mediaExcluded});
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +34,14 @@ class SeletorMidiaWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          (title ??
-              Text(
-                'Adicione arquivos aqui',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              )),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: (title ??
+                Text(
+                  'Adicione arquivos aqui',
+                  style: TextStyle(fontSize: 18),
+                )),
+          ),
           Container(
             height: 205,
             child: Observer(builder: (_) {
@@ -42,20 +49,25 @@ class SeletorMidiaWidget extends StatelessWidget {
                   .where((element) => !element.deletado)
                   .isEmpty) {
                 //caso a lista esteja vazia ou, todos os componentes estejam deletados
-                return Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Image.asset(
-                            'imagens/add_files.png',
-                            width: 100,
-                            package: 'msk_widgets',
-                          )),
-                      Text("Toque em '+' para adicionar arquivos"),
-                    ],
+                return InkWell(
+                  onTap: () {
+                    _exibirOpcoesMidia(context);
+                  },
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Image.asset(
+                              'imagens/add_files.png',
+                              width: 100,
+                              package: 'msk_widgets',
+                            )),
+                        Text("Toque em '+' para adicionar arquivos"),
+                      ],
+                    ),
                   ),
                 );
               } else {
@@ -83,6 +95,7 @@ class SeletorMidiaWidget extends StatelessWidget {
             padding: const EdgeInsets.only(top: 16),
             alignment: Alignment.centerRight,
             child: FloatingActionButton(
+              heroTag: 'add_midia',
               child: Icon(Icons.add),
               onPressed: () {
                 FocusScope.of(context).requestFocus(FocusNode());
@@ -157,9 +170,14 @@ class SeletorMidiaWidget extends StatelessWidget {
 
             path = filePickerCross.path.replaceAll(ex, '');
           }
-          controller.addFoto(path);
+          ItemMidia item = controller.addFoto(path);
+          if (item != null) {
+            mediaAdded?.call(item);
+          }
         }
-      } catch (_) {}
+      } catch (e) {
+        print(e);
+      }
     } else {
       showDialog(
           context: context,
@@ -179,7 +197,10 @@ class SeletorMidiaWidget extends StatelessWidget {
                             source: ImageSource.camera,
                             maxWidth: maxWidth,
                             maxHeight: maxHeight);
-                        controller.addFoto(image?.path);
+                        ItemMidia item = controller.addFoto(image?.path);
+                        if (item != null) {
+                          mediaAdded?.call(item);
+                        }
                       },
                     ),
                     ListTile(
@@ -194,7 +215,10 @@ class SeletorMidiaWidget extends StatelessWidget {
                             maxWidth: maxWidth,
                             maxHeight: maxHeight);
 
-                        controller.addFoto(image?.path);
+                        ItemMidia item = controller.addFoto(image?.path);
+                        if (item != null) {
+                          mediaAdded?.call(item);
+                        }
                       },
                     ),
                   ],
@@ -217,7 +241,10 @@ class SeletorMidiaWidget extends StatelessWidget {
 
             path = filePickerCross.path.replaceAll(ex, '');
           }
-          controller.addFoto(path);
+          ItemMidia item = controller.addVideo(path);
+          if (item != null) {
+            mediaAdded?.call(item);
+          }
         }
       } catch (_) {}
     } else {
@@ -237,7 +264,11 @@ class SeletorMidiaWidget extends StatelessWidget {
                         }
                         PickedFile video = await ImagePicker()
                             .getVideo(source: ImageSource.camera);
-                        controller.addVideo(video?.path);
+                        ItemMidia item = controller.addVideo(video?.path);
+
+                        if (item != null) {
+                          mediaAdded?.call(item);
+                        }
                       },
                     ),
                     ListTile(
@@ -249,7 +280,11 @@ class SeletorMidiaWidget extends StatelessWidget {
                         }
                         PickedFile video = await ImagePicker()
                             .getVideo(source: ImageSource.gallery);
-                        controller.addVideo(video?.path);
+                        ItemMidia item = controller.addVideo(video?.path);
+
+                        if (item != null) {
+                          mediaAdded?.call(item);
+                        }
                       },
                     ),
                   ],
@@ -261,7 +296,7 @@ class SeletorMidiaWidget extends StatelessWidget {
   _exibirOpcoesItem(BuildContext context, int pos) {
     showModalBottomSheet(
         context: context,
-        builder: (_) => BottomSheet(
+        builder: (bottomContext) => BottomSheet(
               onClosing: () {},
               builder: (_) => Column(
                 mainAxisSize: MainAxisSize.min,
@@ -270,7 +305,7 @@ class SeletorMidiaWidget extends StatelessWidget {
                     title: Text('Abrir'),
                     leading: Icon(Icons.fullscreen),
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.pop(bottomContext);
                       List<ItemMidia> itens = controller.midia
                           .where((element) => !element.deletado)
                           .toList();
@@ -290,7 +325,8 @@ class SeletorMidiaWidget extends StatelessWidget {
                     leading: Icon(Icons.close),
                     onTap: () {
                       controller.midia[pos].deletado = true;
-                      Navigator.pop(context);
+                      mediaExcluded?.call(pos);
+                      Navigator.pop(bottomContext);
                     },
                   )
                 ],

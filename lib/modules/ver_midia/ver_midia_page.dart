@@ -4,8 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:midia_select/models/item_midia.dart';
-import 'package:msk_utils/utils/utils_platform.dart';
 import 'package:msk_utils/extensions/string.dart';
+import 'package:msk_utils/utils/utils_platform.dart';
 import 'package:pinch_zoom_image_last/pinch_zoom_image_last.dart';
 
 import 'ver_midia_controller.dart';
@@ -26,46 +26,38 @@ class _VerMidiaPageState extends State<VerMidiaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: Text(widget.title),
         backgroundColor: Colors.black,
-        appBar: AppBar(
-          title: Text(widget.title),
-          backgroundColor: Colors.black,
-          leading: InkWell(
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        body: Builder(
-          builder: (context) {
-            final double height = MediaQuery.of(context).size.height;
-            return Center(
-              child: CarouselSlider.builder(
-                  options: CarouselOptions(
-                      height: height - 100,
-                      enlargeCenterPage: true,
-                      aspectRatio: 2.0,
-                      initialPage: _controller.posicao ?? 0,
-                      enableInfiniteScroll: false),
-                  itemCount: _controller.itens.length,
-                  itemBuilder: (BuildContext context, int itemIndex) {
-                    return Center(
-                      child: Container(
-                          child: InkWell(
-                        onTap: () {},
-                        child: Hero(
-                            tag: itemIndex,
-                            child: _getItemMidia(_controller.itens[itemIndex])),
-                      )),
-                    );
-                  }),
-            );
-          },
-        ));
+      ),
+      body: Builder(
+        builder: (context) {
+          final double height = MediaQuery.of(context).size.height;
+          return Center(
+            child: CarouselSlider.builder(
+                options: CarouselOptions(
+                    height: height - 100,
+                    enlargeCenterPage: true,
+                    aspectRatio: 2.0,
+                    initialPage: _controller.posicao ?? 0,
+                    enableInfiniteScroll: false),
+                itemCount: _controller.itens.length,
+                itemBuilder: (BuildContext context, int itemIndex) {
+                  return Center(
+                    child: Container(
+                        child: InkWell(
+                      onTap: () {},
+                      child: Hero(
+                          tag: itemIndex,
+                          child: _getItemMidia(_controller.itens[itemIndex])),
+                    )),
+                  );
+                }),
+          );
+        },
+      ),
+    );
   }
 
   _getItemMidia(ItemMidia item) {
