@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:midia_select/models/item_midia.dart';
-import 'package:msk_utils/utils/utils_platform.dart';
+import 'package:msk_utils/msk_utils.dart';
 
 import 'item_midia_controller.dart';
 
@@ -44,19 +44,21 @@ class ItemMidiaWidget extends StatelessWidget {
                       ),
                     ]),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      controller.item.deletado
-                          ? 'Removida'
-                          : controller.item.strings.values.first ?? '',
-                      overflow: TextOverflow.clip,
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                      style: controller.item.deletado
-                          ? TextStyle(color: Colors.red)
-                          : null,
-                    ),
+                  Expanded(
+                    child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          controller.item.deletado
+                              ? 'Removida'
+                              : controller.item.strings.values.firstOrNull ??
+                                  '',
+                          overflow: TextOverflow.clip,
+                          maxLines: 2,
+                          textAlign: TextAlign.center,
+                          style: controller.item.deletado
+                              ? TextStyle(color: Colors.red)
+                              : null,
+                        )),
                   )
                 ],
               ),
