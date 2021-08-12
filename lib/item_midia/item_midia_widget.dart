@@ -9,13 +9,14 @@ import 'package:msk_utils/msk_utils.dart';
 import 'item_midia_controller.dart';
 
 class ItemMidiaWidget extends StatelessWidget {
-  static const double HEIGHT = 140;
-  static const double WIDTH = 110;
+  final double height;
+  final double width;
 
-  final controller = ItemMidiaController();
+  final ItemMidiaController controller = ItemMidiaController();
   final VoidCallback _onTap;
 
-  ItemMidiaWidget(ItemMidia itemFoto, this._onTap) {
+  ItemMidiaWidget(ItemMidia itemFoto, this._onTap,
+      {this.height = 140, this.width = 110}) {
     controller.item = itemFoto;
   }
 
@@ -23,21 +24,24 @@ class ItemMidiaWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
       return Container(
-          width: 110,
-          height: 180,
+          width: width,
+          height: height + 40,
           child: Card(
             child: InkWell(
               onTap: _onTap,
               child: Column(
                 children: <Widget>[
                   Container(
-                    width: 110,
-                    height: 140,
+                    width: width,
+                    height: height,
                     child: Stack(children: [
-                      Container(width: 110, height: 180, child: _getMidia()),
                       Container(
-                        width: 110,
-                        height: 140,
+                          width: width,
+                          height: height + 40,
+                          child: _getMidia()),
+                      Container(
+                        width: width,
+                        height: height,
                         color: controller.item.deletado == true
                             ? Colors.white70
                             : Colors.transparent,
@@ -74,8 +78,8 @@ class ItemMidiaWidget extends StatelessWidget {
       case TipoMidiaEnum.AUDIO:
         return _getWidgetOutrasMidias(Image.asset(
           'imagens/icone_audio.png',
-          width: WIDTH - 30,
-          height: HEIGHT - 30,
+          width: width - 30,
+          height: height - 30,
         ));
       case TipoMidiaEnum.VIDEO:
         return _getWidgetOutrasMidias(Image.asset('imagens/icone_video.png'));
@@ -86,8 +90,8 @@ class ItemMidiaWidget extends StatelessWidget {
 
   Widget _getWidgetOutrasMidias(Widget icone) {
     return Container(
-      width: WIDTH,
-      height: HEIGHT,
+      width: width,
+      height: height,
       child: Center(
         child: icone,
       ),
@@ -99,14 +103,14 @@ class ItemMidiaWidget extends StatelessWidget {
       if (UtilsPlatform.isWindows || UtilsPlatform.isWeb) {
         return Image.network(
           controller.item.url,
-          width: WIDTH,
-          height: HEIGHT,
+          width: width,
+          height: height,
           fit: BoxFit.cover,
         );
       } else
         return CachedNetworkImage(
-          width: WIDTH,
-          height: HEIGHT,
+          width: width,
+          height: height,
           fit: BoxFit.cover,
           errorWidget: (_, _a, _b) {
             return Text('Falha ao carregar imagem');
@@ -117,7 +121,7 @@ class ItemMidiaWidget extends StatelessWidget {
         );
     } else {
       return Image.file(File(controller.item?.path),
-          fit: BoxFit.cover, width: WIDTH, height: HEIGHT);
+          fit: BoxFit.cover, width: width, height: height);
     }
   }
 }
