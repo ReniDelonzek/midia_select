@@ -30,6 +30,9 @@ class _VerMidiaPageState extends State<VerMidiaPage> {
       appBar: AppBar(
         title: Text(widget.title),
         backgroundColor: Colors.black,
+        leading: BackButton(
+          color: Colors.white,
+        ),
       ),
       body: Builder(
         builder: (context) {
