@@ -46,14 +46,15 @@ class _VerMidiaPageState extends State<VerMidiaPage> {
                     initialPage: _controller.posicao ?? 0,
                     enableInfiniteScroll: false),
                 itemCount: _controller.itens.length,
-                itemBuilder: (BuildContext context, int itemIndex) {
+                itemBuilder:
+                    (BuildContext context, int itemIndex, int realIndex) {
                   return Center(
                     child: Container(
                         child: InkWell(
                       onTap: () {},
                       child: Hero(
-                          tag: itemIndex,
-                          child: _getItemMidia(_controller.itens[itemIndex])),
+                          tag: realIndex,
+                          child: _getItemMidia(_controller.itens[realIndex])),
                     )),
                   );
                 }),

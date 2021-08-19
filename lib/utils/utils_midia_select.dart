@@ -130,7 +130,7 @@ class UtilsMidiaSelect {
                         if (Navigator.canPop(context)) {
                           Navigator.pop(context);
                         }
-                        PickedFile image = await ImagePicker().getImage(
+                        XFile image = await ImagePicker().pickImage(
                             source: ImageSource.camera,
                             maxWidth: maxWidth,
                             maxHeight: maxHeight);
@@ -147,7 +147,7 @@ class UtilsMidiaSelect {
                         if (Navigator.canPop(context)) {
                           Navigator.pop(context);
                         }
-                        PickedFile image = await ImagePicker().getImage(
+                        XFile image = await ImagePicker().pickImage(
                             source: ImageSource.gallery,
                             maxWidth: maxWidth,
                             maxHeight: maxHeight);
@@ -200,8 +200,8 @@ class UtilsMidiaSelect {
                         if (Navigator.canPop(context)) {
                           Navigator.pop(context);
                         }
-                        PickedFile video = await ImagePicker()
-                            .getVideo(source: ImageSource.camera);
+                        XFile video = await ImagePicker()
+                            .pickVideo(source: ImageSource.camera);
                         ItemMidia item = getItemMidiaVideo(path: video?.path);
 
                         if (item != null) {
@@ -216,10 +216,9 @@ class UtilsMidiaSelect {
                         if (Navigator.canPop(context)) {
                           Navigator.pop(context);
                         }
-                        PickedFile video = await ImagePicker()
-                            .getVideo(source: ImageSource.gallery);
+                        XFile video = await ImagePicker()
+                            .pickVideo(source: ImageSource.gallery);
                         ItemMidia item = getItemMidiaVideo(path: video?.path);
-
                         if (item != null) {
                           midiaAdded?.call(item);
                         }
