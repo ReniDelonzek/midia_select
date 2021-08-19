@@ -1,7 +1,5 @@
 import 'package:midia_select/models/item_midia.dart';
-import 'package:midia_select/utils/utils_midia_select.dart';
 import 'package:mobx/mobx.dart';
-import 'package:path/path.dart';
 
 part 'seletor_midia_controller.g.dart';
 
