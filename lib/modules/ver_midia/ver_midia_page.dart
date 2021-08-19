@@ -13,7 +13,7 @@ import 'ver_midia_module.dart';
 
 class VerMidiaPage extends StatefulWidget {
   final String title;
-  const VerMidiaPage({Key key, this.title = ""}) : super(key: key);
+  const VerMidiaPage({Key? key, this.title = ""}) : super(key: key);
 
   @override
   _VerMidiaPageState createState() => _VerMidiaPageState();
@@ -50,11 +50,9 @@ class _VerMidiaPageState extends State<VerMidiaPage> {
                     (BuildContext context, int itemIndex, int realIndex) {
                   return Center(
                     child: Container(
-                        child: InkWell(
-                      onTap: () {},
-                      child: Hero(
-                          tag: realIndex,
-                          child: _getItemMidia(_controller.itens[realIndex])),
+                        child: Hero(
+                      tag: realIndex,
+                      child: _getItemMidia(_controller.itens[realIndex]),
                     )),
                   );
                 }),
@@ -72,11 +70,11 @@ class _VerMidiaPageState extends State<VerMidiaPage> {
         }
         return PinchZoomImage(
           image: item.url.isNullOrBlank
-              ? Image.file(File(item.path))
+              ? Image.file(File(item.path!))
               : (UtilsPlatform.isWeb || UtilsPlatform.isWindows)
-                  ? Image.network(item.url)
+                  ? Image.network(item.url!)
                   : CachedNetworkImage(
-                      imageUrl: item.url,
+                      imageUrl: item.url!,
                       fit: BoxFit.contain,
                       placeholder: (_, url) =>
                           Center(child: CircularProgressIndicator()),
@@ -115,11 +113,11 @@ class _VerMidiaPageState extends State<VerMidiaPage> {
       default:
         return PinchZoomImage(
           image: item.url.isNullOrBlank
-              ? Image.file(File(item.path))
+              ? Image.file(File(item.path!))
               : UtilsPlatform.isWeb
-                  ? Image.network(item.url)
+                  ? Image.network(item.url!)
                   : CachedNetworkImage(
-                      imageUrl: item.url,
+                      imageUrl: item.url!,
                       fit: BoxFit.contain,
                       placeholder: (_, url) =>
                           Center(child: CircularProgressIndicator()),

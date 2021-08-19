@@ -12,13 +12,13 @@ mixin _$ItemMidiaController on _ItemMidiaBase, Store {
   final _$itemAtom = Atom(name: '_ItemMidiaBase.item');
 
   @override
-  ItemMidia get item {
+  ItemMidia? get item {
     _$itemAtom.reportRead();
     return super.item;
   }
 
   @override
-  set item(ItemMidia value) {
+  set item(ItemMidia? value) {
     _$itemAtom.reportWrite(value, super.item, () {
       super.item = value;
     });

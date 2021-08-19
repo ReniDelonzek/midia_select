@@ -7,11 +7,7 @@ class VerMidiaController = _VerMidiaBase with _$VerMidiaController;
 
 abstract class _VerMidiaBase with Store {
   List<ItemMidia> itens;
-  int posicao;
+  int? posicao;
 
-  _VerMidiaBase(this.itens, {this.posicao}) {
-    if (posicao == null) {
-      posicao = 0;
-    }
-  }
+  _VerMidiaBase(this.itens, {this.posicao = 0});
 }

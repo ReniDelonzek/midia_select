@@ -12,11 +12,11 @@ import 'seletor_midia_controller.dart';
 class SeletorMidiaWidget extends StatelessWidget {
   final SeletorMidiaController controller;
   final List<TipoMidiaEnum> tiposMidia;
-  final double maxWidth;
-  final double maxHeight;
-  final Widget title;
-  final Function(ItemMidia) mediaAdded;
-  final Function(int) mediaExcluded;
+  final double? maxWidth;
+  final double? maxHeight;
+  final Widget? title;
+  final Function(ItemMidia)? mediaAdded;
+  final Function(int)? mediaExcluded;
 
   const SeletorMidiaWidget(this.controller,
       {this.maxWidth,

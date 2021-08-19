@@ -5,7 +5,10 @@ part 'item_midia.g.dart';
 
 class ItemMidia extends _ItemMidia with _$ItemMidia {
   ItemMidia(
-      {String url, String path, TipoMidiaEnum tipoMidia, dynamic controlador})
+      {String? url,
+      String? path,
+      TipoMidiaEnum tipoMidia = TipoMidiaEnum.IMAGEM,
+      dynamic controlador})
       : super(
             path: path,
             url: url,
@@ -14,16 +17,20 @@ class ItemMidia extends _ItemMidia with _$ItemMidia {
 }
 
 abstract class _ItemMidia extends ItemSelect with Store {
-  String url;
-  String path;
+  String? url;
+  String? path;
   TipoMidiaEnum tipoMidia;
   dynamic controlador;
-  _ItemMidia({this.path, this.url, this.tipoMidia, this.controlador});
+  _ItemMidia(
+      {this.path,
+      this.url,
+      this.tipoMidia = TipoMidiaEnum.IMAGEM,
+      this.controlador});
 }
 
 enum TipoMidiaEnum { AUDIO, IMAGEM, VIDEO }
 
-getIntTipoMidia(TipoMidiaEnum tipo) {
+int getIntTipoMidia(TipoMidiaEnum tipo) {
   switch (tipo) {
     case TipoMidiaEnum.IMAGEM:
       return 1;

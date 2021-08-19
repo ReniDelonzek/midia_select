@@ -6,33 +6,33 @@ import 'package:msk_utils/utils/utils_platform.dart';
 import 'package:path/path.dart';
 
 class UtilsMidiaSelect {
-  static ItemMidia getItemMidiaImage({String path, String url, dynamic obj}) {
-    ItemMidia itemMidia =
+  static ItemMidia? getItemMidiaImage({String? path, String? url, dynamic obj}) {
+    ItemMidia? itemMidia =
         UtilsMidiaSelect.getItemMidia(path: path, url: url, obj: obj);
     itemMidia?.tipoMidia = TipoMidiaEnum.IMAGEM;
     return itemMidia;
   }
 
-  static ItemMidia getItemMidiaVideo({String path, String url, dynamic obj}) {
-    ItemMidia itemMidia =
+  static ItemMidia? getItemMidiaVideo({String? path, String? url, dynamic obj}) {
+    ItemMidia? itemMidia =
         UtilsMidiaSelect.getItemMidia(path: path, url: url, obj: obj);
     itemMidia?.tipoMidia = TipoMidiaEnum.VIDEO;
     return itemMidia;
   }
 
-  static ItemMidia getItemMidiaAudio({String path, String url, dynamic obj}) {
-    ItemMidia itemMidia =
+  static ItemMidia? getItemMidiaAudio({String? path, String? url, dynamic obj}) {
+    ItemMidia? itemMidia =
         UtilsMidiaSelect.getItemMidia(path: path, url: url, obj: obj);
     itemMidia?.tipoMidia = TipoMidiaEnum.AUDIO;
     return itemMidia;
   }
 
-  static ItemMidia getItemMidia({String path, String url, dynamic obj}) {
+  static ItemMidia? getItemMidia({String? path, String? url, dynamic obj}) {
     if (path != null || url != null) {
       ItemMidia item = ItemMidia();
       item.strings = Map();
       if (path != null) {
-        item.strings['file'] = basename(path);
+        item.strings!['file'] = basename(path);
       }
       item.path = path;
       item.url = url;
@@ -93,7 +93,7 @@ class UtilsMidiaSelect {
 
   static Future<void> _exibirOpcoesFoto(
       BuildContext context, final Function(ItemMidia) midiaAdded,
-      {double maxWidth, double maxHeight}) async {
+      {double? maxWidth, double? maxHeight}) async {
     if (!UtilsPlatform.isMobile) {
       try {
         String ex = 'jpg, png, jpeg';
@@ -101,13 +101,13 @@ class UtilsMidiaSelect {
             await FilePickerCross.importFromStorage(
                 type: FileTypeCross.image, fileExtension: ex);
         if (filePickerCross != null) {
-          String path = filePickerCross.path;
+          String? path = filePickerCross.path;
           if (UtilsPlatform.isMacos) {
             // Corrige nomes dos arquivos errados
 
-            path = filePickerCross.path.replaceAll(ex, '');
+            path = filePickerCross.path!.replaceAll(ex, '');
           }
-          ItemMidia item = getItemMidiaImage(path: path);
+          ItemMidia? item = getItemMidiaImage(path: path);
           if (item != null) {
             midiaAdded?.call(item);
           }
@@ -130,11 +130,11 @@ class UtilsMidiaSelect {
                         if (Navigator.canPop(context)) {
                           Navigator.pop(context);
                         }
-                        XFile image = await ImagePicker().pickImage(
+                        XFile? image = await ImagePicker().pickImage(
                             source: ImageSource.camera,
                             maxWidth: maxWidth,
                             maxHeight: maxHeight);
-                        ItemMidia item = getItemMidiaImage(path: image?.path);
+                        ItemMidia? item = getItemMidiaImage(path: image?.path);
                         if (item != null) {
                           midiaAdded?.call(item);
                         }
@@ -147,12 +147,12 @@ class UtilsMidiaSelect {
                         if (Navigator.canPop(context)) {
                           Navigator.pop(context);
                         }
-                        XFile image = await ImagePicker().pickImage(
+                        XFile? image = await ImagePicker().pickImage(
                             source: ImageSource.gallery,
                             maxWidth: maxWidth,
                             maxHeight: maxHeight);
 
-                        ItemMidia item = getItemMidiaImage(path: image?.path);
+                        ItemMidia? item = getItemMidiaImage(path: image?.path);
                         if (item != null) {
                           midiaAdded?.call(item);
                         }
@@ -173,13 +173,13 @@ class UtilsMidiaSelect {
             await FilePickerCross.importFromStorage(
                 type: FileTypeCross.image, fileExtension: ex);
         if (filePickerCross != null) {
-          String path = filePickerCross.path;
+          String? path = filePickerCross.path;
           if (UtilsPlatform.isMacos) {
             // Corrige nomes dos arquivos errados
 
-            path = filePickerCross.path.replaceAll(ex, '');
+            path = filePickerCross.path!.replaceAll(ex, '');
           }
-          ItemMidia item = getItemMidiaVideo(path: path);
+          ItemMidia? item = getItemMidiaVideo(path: path);
           if (item != null) {
             midiaAdded?.call(item);
           }
@@ -200,9 +200,9 @@ class UtilsMidiaSelect {
                         if (Navigator.canPop(context)) {
                           Navigator.pop(context);
                         }
-                        XFile video = await ImagePicker()
+                        XFile? video = await ImagePicker()
                             .pickVideo(source: ImageSource.camera);
-                        ItemMidia item = getItemMidiaVideo(path: video?.path);
+                        ItemMidia? item = getItemMidiaVideo(path: video?.path);
 
                         if (item != null) {
                           midiaAdded?.call(item);
@@ -216,9 +216,9 @@ class UtilsMidiaSelect {
                         if (Navigator.canPop(context)) {
                           Navigator.pop(context);
                         }
-                        XFile video = await ImagePicker()
+                        XFile? video = await ImagePicker()
                             .pickVideo(source: ImageSource.gallery);
-                        ItemMidia item = getItemMidiaVideo(path: video?.path);
+                        ItemMidia? item = getItemMidiaVideo(path: video?.path);
                         if (item != null) {
                           midiaAdded?.call(item);
                         }

@@ -13,7 +13,7 @@ class ItemMidiaWidget extends StatelessWidget {
   final double width;
 
   final ItemMidiaController controller = ItemMidiaController();
-  final VoidCallback _onTap;
+  final VoidCallback? _onTap;
 
   ItemMidiaWidget(ItemMidia itemFoto, this._onTap,
       {this.height = 140, this.width = 110}) {
@@ -42,7 +42,7 @@ class ItemMidiaWidget extends StatelessWidget {
                       Container(
                         width: width,
                         height: height,
-                        color: controller.item.deletado == true
+                        color: controller.item!.deletado == true
                             ? Colors.white70
                             : Colors.transparent,
                       ),
@@ -52,14 +52,14 @@ class ItemMidiaWidget extends StatelessWidget {
                     child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          controller.item.deletado
+                          controller.item!.deletado
                               ? 'Removida'
-                              : controller.item.strings.values.firstOrNull ??
+                              : controller.item!.strings!.values.firstOrNull ??
                                   '',
                           overflow: TextOverflow.clip,
                           maxLines: 2,
                           textAlign: TextAlign.center,
-                          style: controller.item.deletado
+                          style: controller.item!.deletado
                               ? TextStyle(color: Colors.red)
                               : null,
                         )),
@@ -72,7 +72,7 @@ class ItemMidiaWidget extends StatelessWidget {
   }
 
   Widget _getMidia() {
-    switch (controller.item.tipoMidia) {
+    switch (controller.item!.tipoMidia) {
       case TipoMidiaEnum.IMAGEM:
         return _getImagem();
       case TipoMidiaEnum.AUDIO:
@@ -98,11 +98,11 @@ class ItemMidiaWidget extends StatelessWidget {
     );
   }
 
-  _getImagem() {
-    if (controller.item.url?.isNotEmpty == true) {
+  Widget _getImagem() {
+    if (controller.item!.url?.isNotEmpty == true) {
       if (UtilsPlatform.isWindows || UtilsPlatform.isWeb) {
         return Image.network(
-          controller.item.url,
+          controller.item!.url!,
           width: width,
           height: height,
           fit: BoxFit.cover,
@@ -117,11 +117,14 @@ class ItemMidiaWidget extends StatelessWidget {
           },
           placeholder: (context, url) =>
               Center(child: CircularProgressIndicator()),
-          imageUrl: controller.item.url,
+          imageUrl: controller.item!.url!,
         );
     } else {
-      return Image.file(File(controller.item?.path),
-          fit: BoxFit.cover, width: width, height: height);
+      if (controller.item?.path != null) {
+        return Image.file(File(controller.item!.path!),
+            fit: BoxFit.cover, width: width, height: height);
+      }
     }
+    return Icon(Icons.image);
   }
 }

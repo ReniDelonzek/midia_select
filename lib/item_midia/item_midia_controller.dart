@@ -7,5 +7,5 @@ class ItemMidiaController = _ItemMidiaBase with _$ItemMidiaController;
 
 abstract class _ItemMidiaBase with Store {
   @observable
-  ItemMidia item;
+  ItemMidia? item;
 }
