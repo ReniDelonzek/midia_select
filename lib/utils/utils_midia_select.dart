@@ -6,21 +6,24 @@ import 'package:msk_utils/utils/utils_platform.dart';
 import 'package:path/path.dart';
 
 class UtilsMidiaSelect {
-  static ItemMidia? getItemMidiaImage({String? path, String? url, dynamic obj}) {
+  static ItemMidia? getItemMidiaImage(
+      {String? path, String? url, dynamic obj}) {
     ItemMidia? itemMidia =
         UtilsMidiaSelect.getItemMidia(path: path, url: url, obj: obj);
     itemMidia?.tipoMidia = TipoMidiaEnum.IMAGEM;
     return itemMidia;
   }
 
-  static ItemMidia? getItemMidiaVideo({String? path, String? url, dynamic obj}) {
+  static ItemMidia? getItemMidiaVideo(
+      {String? path, String? url, dynamic obj}) {
     ItemMidia? itemMidia =
         UtilsMidiaSelect.getItemMidia(path: path, url: url, obj: obj);
     itemMidia?.tipoMidia = TipoMidiaEnum.VIDEO;
     return itemMidia;
   }
 
-  static ItemMidia? getItemMidiaAudio({String? path, String? url, dynamic obj}) {
+  static ItemMidia? getItemMidiaAudio(
+      {String? path, String? url, dynamic obj}) {
     ItemMidia? itemMidia =
         UtilsMidiaSelect.getItemMidia(path: path, url: url, obj: obj);
     itemMidia?.tipoMidia = TipoMidiaEnum.AUDIO;
@@ -100,17 +103,15 @@ class UtilsMidiaSelect {
         FilePickerCross filePickerCross =
             await FilePickerCross.importFromStorage(
                 type: FileTypeCross.image, fileExtension: ex);
-        if (filePickerCross != null) {
-          String? path = filePickerCross.path;
-          if (UtilsPlatform.isMacos) {
-            // Corrige nomes dos arquivos errados
+        String? path = filePickerCross.path;
+        if (UtilsPlatform.isMacos) {
+          // Corrige nomes dos arquivos errados
 
-            path = filePickerCross.path!.replaceAll(ex, '');
-          }
-          ItemMidia? item = getItemMidiaImage(path: path);
-          if (item != null) {
-            midiaAdded?.call(item);
-          }
+          path = filePickerCross.path!.replaceAll(ex, '');
+        }
+        ItemMidia? item = getItemMidiaImage(path: path);
+        if (item != null) {
+          midiaAdded.call(item);
         }
       } catch (e) {
         print(e);
@@ -136,7 +137,7 @@ class UtilsMidiaSelect {
                             maxHeight: maxHeight);
                         ItemMidia? item = getItemMidiaImage(path: image?.path);
                         if (item != null) {
-                          midiaAdded?.call(item);
+                          midiaAdded.call(item);
                         }
                       },
                     ),
@@ -154,7 +155,7 @@ class UtilsMidiaSelect {
 
                         ItemMidia? item = getItemMidiaImage(path: image?.path);
                         if (item != null) {
-                          midiaAdded?.call(item);
+                          midiaAdded.call(item);
                         }
                       },
                     ),
@@ -172,17 +173,15 @@ class UtilsMidiaSelect {
         FilePickerCross filePickerCross =
             await FilePickerCross.importFromStorage(
                 type: FileTypeCross.image, fileExtension: ex);
-        if (filePickerCross != null) {
-          String? path = filePickerCross.path;
-          if (UtilsPlatform.isMacos) {
-            // Corrige nomes dos arquivos errados
+        String? path = filePickerCross.path;
+        if (UtilsPlatform.isMacos) {
+          // Corrige nomes dos arquivos errados
 
-            path = filePickerCross.path!.replaceAll(ex, '');
-          }
-          ItemMidia? item = getItemMidiaVideo(path: path);
-          if (item != null) {
-            midiaAdded?.call(item);
-          }
+          path = filePickerCross.path!.replaceAll(ex, '');
+        }
+        ItemMidia? item = getItemMidiaVideo(path: path);
+        if (item != null) {
+          midiaAdded.call(item);
         }
       } catch (_) {}
     } else {
@@ -205,7 +204,7 @@ class UtilsMidiaSelect {
                         ItemMidia? item = getItemMidiaVideo(path: video?.path);
 
                         if (item != null) {
-                          midiaAdded?.call(item);
+                          midiaAdded.call(item);
                         }
                       },
                     ),
@@ -220,7 +219,7 @@ class UtilsMidiaSelect {
                             .pickVideo(source: ImageSource.gallery);
                         ItemMidia? item = getItemMidiaVideo(path: video?.path);
                         if (item != null) {
-                          midiaAdded?.call(item);
+                          midiaAdded.call(item);
                         }
                       },
                     ),
