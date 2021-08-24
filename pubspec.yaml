@@ -10,13 +10,7 @@ environment:
 
 dependencies:
   file_picker_cross: ^4.2.2
-  msk_utils:
-    #path: "C:/Users/reni/Downloads/Projetos/agro/libs/msk_utils"
-    #path: /Users/reni/Downloads/Projetos/MSK/flutter/msk_plugin/msk_utils
-    git:
-      url: https://github.com/ReniDelonzek/msk_utils.git
-      ref: 8c4d7ab378b853e6ea732121c14e76dee7741e14
-
+  msk_utils: ^0.0.3
   image_picker: ^0.6.7+22
   flutter_mobx: ^0.3.3+3
   pinch_zoom_image_last: ^0.3.1
