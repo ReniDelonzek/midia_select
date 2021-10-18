@@ -30,7 +30,8 @@ class UtilsMidiaSelect {
     return itemMidia;
   }
 
-  static ItemMidia? getItemMidia({String? path, String? url, dynamic obj}) {
+  static ItemMidia? getItemMidia(
+      {String? path, String? url, dynamic obj, int? id}) {
     if (path != null || url != null) {
       ItemMidia item = ItemMidia();
       item.strings = Map();
@@ -40,6 +41,7 @@ class UtilsMidiaSelect {
       item.path = path;
       item.url = url;
       item.object = obj;
+      item.id = id;
       return item;
     }
     return null;
