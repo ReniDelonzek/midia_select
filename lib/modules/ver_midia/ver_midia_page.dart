@@ -26,12 +26,19 @@ class _VerMidiaPageState extends State<VerMidiaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: _controller.backgroundColor ?? Colors.black,
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.black,
-        leading: BackButton(
-          color: Colors.white,
+        backgroundColor: _controller.backgroundColor ?? Colors.black,
+        leading: IconButton(
+          tooltip: 'Voltar',
+          icon: Icon(
+            Icons.arrow_back,
+            color: _controller.appBarColor ?? Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
       body: Builder(
@@ -62,7 +69,7 @@ class _VerMidiaPageState extends State<VerMidiaPage> {
     );
   }
 
-  _getItemMidia(ItemMidia item) {
+  Widget _getItemMidia(ItemMidia item) {
     switch (item.tipoMidia) {
       case TipoMidiaEnum.IMAGEM:
         if (item.url.isNullOrBlank && item.path.isNullOrBlank) {

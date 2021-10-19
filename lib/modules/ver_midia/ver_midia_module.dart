@@ -8,12 +8,17 @@ import 'ver_midia_page.dart';
 class VerMidiaModule extends ModuleWidget {
   final List<ItemMidia> itens;
   final int posicaoInicial;
+  final Color? backgroundColor;
+  final Color? appBarColor;
 
-  VerMidiaModule(this.itens, {this.posicaoInicial = 0});
+  VerMidiaModule(this.itens,
+      {this.posicaoInicial = 0, this.backgroundColor, this.appBarColor});
   @override
   List<Bloc> get blocs => [
-        Bloc(
-            (i) => VerMidiaController(this.itens, posicao: this.posicaoInicial))
+        Bloc((i) => VerMidiaController(this.itens,
+            posicao: this.posicaoInicial,
+            backgroundColor: backgroundColor,
+            appBarColor: appBarColor))
       ];
 
   @override
