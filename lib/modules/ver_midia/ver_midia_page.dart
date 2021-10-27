@@ -78,19 +78,21 @@ class _VerMidiaPageState extends State<VerMidiaPage> {
         Widget errorWidget = Icon(Icons.image_not_supported_outlined);
         return PinchZoomImage(
           image:
-              item.path?.isNullOrBlank == false && File(item.path).existsSync()
-                  ? Image.file(File(item.path),
+              item.path?.isNullOrBlank == false && File(item.path!).existsSync()
+                  ? Image.file(File(item.path!),
                       errorBuilder: (_, obj, stack) => errorWidget)
-                  : (UtilsPlatform.isWeb || UtilsPlatform.isWindows)
-                      ? Image.network(item.url,
-                          errorBuilder: (_, obj, stack) => errorWidget)
-                      : CachedNetworkImage(
-                          imageUrl: item.url,
-                          fit: BoxFit.contain,
-                          errorWidget: (_, s, d) => errorWidget,
-                          placeholder: (_, url) =>
-                              Center(child: CircularProgressIndicator()),
-                        ),
+                  : item.url?.isNullOrEmpty == false
+                      ? (UtilsPlatform.isWeb || UtilsPlatform.isWindows)
+                          ? Image.network(item.url!,
+                              errorBuilder: (_, obj, stack) => errorWidget)
+                          : CachedNetworkImage(
+                              imageUrl: item.url!,
+                              fit: BoxFit.contain,
+                              errorWidget: (_, s, d) => errorWidget,
+                              placeholder: (_, url) =>
+                                  Center(child: CircularProgressIndicator()),
+                            )
+                      : errorWidget,
         );
       case TipoMidiaEnum.VIDEO:
         return Text(

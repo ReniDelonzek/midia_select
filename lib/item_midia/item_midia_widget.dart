@@ -102,15 +102,15 @@ class ItemMidiaWidget extends StatelessWidget {
     Widget errorWidget = Icon(Icons.image_not_supported_outlined);
 
     if (controller.item?.path?.isNullOrBlank == false &&
-        File(controller.item.path).existsSync()) {
+        File(controller.item!.path!).existsSync()) {
       return Image.file(
-        File(controller.item.path),
+        File(controller.item!.path!),
         fit: BoxFit.cover,
         width: width,
         height: height,
         errorBuilder: (_, object, stack) => errorWidget,
       );
-    } else if (controller.item.url?.isNotEmpty == true) {
+    } else if (controller.item!.url?.isNotEmpty == true) {
       if (UtilsPlatform.isWindows || UtilsPlatform.isWeb) {
         return Image.network(
           controller.item!.url!,
