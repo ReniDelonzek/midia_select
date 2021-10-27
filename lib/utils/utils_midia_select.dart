@@ -48,11 +48,15 @@ class UtilsMidiaSelect {
   }
 
   static exibirOpcoesMidia(BuildContext buildContext,
-      List<TipoMidiaEnum> tiposMidia, final Function(ItemMidia) midiaAdded) {
+      List<TipoMidiaEnum> tiposMidia, final Function(ItemMidia) midiaAdded,
+      {int imageQuality = 85, double maxWidth, double maxHeight}) {
     if (tiposMidia.length == 1) {
       switch (tiposMidia.first) {
         case TipoMidiaEnum.IMAGEM:
-          _exibirOpcoesFoto(buildContext, midiaAdded);
+          _exibirOpcoesFoto(buildContext, midiaAdded,
+              maxHeight: maxHeight,
+              maxWidth: maxWidth,
+              imageQuality: imageQuality);
           break;
         case TipoMidiaEnum.VIDEO:
           _exibirOpcoesVideo(buildContext, midiaAdded);
@@ -75,7 +79,10 @@ class UtilsMidiaSelect {
                               if (Navigator.canPop(context)) {
                                 Navigator.pop(context);
                               }
-                              _exibirOpcoesFoto(buildContext, midiaAdded);
+                              _exibirOpcoesFoto(buildContext, midiaAdded,
+                                  maxHeight: maxHeight,
+                                  maxWidth: maxWidth,
+                                  imageQuality: imageQuality);
                             })
                         : Container(),
                     tiposMidia.contains(TipoMidiaEnum.VIDEO)
@@ -98,7 +105,7 @@ class UtilsMidiaSelect {
 
   static Future<void> _exibirOpcoesFoto(
       BuildContext context, final Function(ItemMidia) midiaAdded,
-      {double? maxWidth, double? maxHeight}) async {
+      {double maxWidth, double maxHeight, int imageQuality = 85}) async {
     if (!UtilsPlatform.isMobile) {
       try {
         String ex = 'jpg, png, jpeg';
@@ -109,11 +116,14 @@ class UtilsMidiaSelect {
         if (UtilsPlatform.isMacos) {
           // Corrige nomes dos arquivos errados
 
-          path = filePickerCross.path!.replaceAll(ex, '');
-        }
-        ItemMidia? item = getItemMidiaImage(path: path);
-        if (item != null) {
-          midiaAdded.call(item);
+            path = filePickerCross.path.replaceAll(ex, '');
+          }
+          // filePickerCross = await UtilsMidiaSelect.compressImage(
+          //     filePickerCross, filePickerCross.fileName, imageQuality);
+          ItemMidia item = getItemMidiaImage(path: path);
+          if (item != null) {
+            midiaAdded?.call(item);
+          }
         }
       } catch (e) {
         print(e);
@@ -136,8 +146,9 @@ class UtilsMidiaSelect {
                         XFile? image = await ImagePicker().pickImage(
                             source: ImageSource.camera,
                             maxWidth: maxWidth,
-                            maxHeight: maxHeight);
-                        ItemMidia? item = getItemMidiaImage(path: image?.path);
+                            maxHeight: maxHeight,
+                            imageQuality: imageQuality);
+                        ItemMidia item = getItemMidiaImage(path: image?.path);
                         if (item != null) {
                           midiaAdded.call(item);
                         }
@@ -153,7 +164,8 @@ class UtilsMidiaSelect {
                         XFile? image = await ImagePicker().pickImage(
                             source: ImageSource.gallery,
                             maxWidth: maxWidth,
-                            maxHeight: maxHeight);
+                            maxHeight: maxHeight,
+                            imageQuality: imageQuality);
 
                         ItemMidia? item = getItemMidiaImage(path: image?.path);
                         if (item != null) {
@@ -230,4 +242,3 @@ class UtilsMidiaSelect {
               ));
     }
   }
-}

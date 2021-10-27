@@ -99,32 +99,37 @@ class ItemMidiaWidget extends StatelessWidget {
   }
 
   Widget _getImagem() {
-    if (controller.item!.url?.isNotEmpty == true) {
+    Widget errorWidget = Icon(Icons.image_not_supported_outlined);
+
+    if (controller.item?.path?.isNullOrBlank == false &&
+        File(controller.item.path).existsSync()) {
+      return Image.file(
+        File(controller.item.path),
+        fit: BoxFit.cover,
+        width: width,
+        height: height,
+        errorBuilder: (_, object, stack) => errorWidget,
+      );
+    } else if (controller.item.url?.isNotEmpty == true) {
       if (UtilsPlatform.isWindows || UtilsPlatform.isWeb) {
         return Image.network(
           controller.item!.url!,
           width: width,
           height: height,
           fit: BoxFit.cover,
+          errorBuilder: (_, object, stack) => errorWidget,
         );
       } else
         return CachedNetworkImage(
           width: width,
           height: height,
           fit: BoxFit.cover,
-          errorWidget: (_, _a, _b) {
-            return Text('Falha ao carregar imagem');
-          },
+          errorWidget: (_, _a, _b) => errorWidget,
           placeholder: (context, url) =>
               Center(child: CircularProgressIndicator()),
           imageUrl: controller.item!.url!,
         );
-    } else {
-      if (controller.item?.path != null) {
-        return Image.file(File(controller.item!.path!),
-            fit: BoxFit.cover, width: width, height: height);
-      }
     }
-    return Icon(Icons.image);
+    return errorWidget;
   }
 }
