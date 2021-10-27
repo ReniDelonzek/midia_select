@@ -17,14 +17,16 @@ class SeletorMidiaWidget extends StatelessWidget {
   final Widget title;
   final Function(ItemMidia) mediaAdded;
   final Function(int) mediaExcluded;
+  final int imageQuality;
 
   const SeletorMidiaWidget(this.controller,
-      {this.maxWidth,
-      this.maxHeight,
+      {this.maxWidth = 1200,
+      this.maxHeight = 2124,
       this.title,
       this.tiposMidia = const [TipoMidiaEnum.IMAGEM],
       this.mediaAdded,
-      this.mediaExcluded});
+      this.mediaExcluded,
+      this.imageQuality = 85});
 
   @override
   Widget build(BuildContext context) {
@@ -50,12 +52,7 @@ class SeletorMidiaWidget extends StatelessWidget {
                 //caso a lista esteja vazia ou, todos os componentes estejam deletados
                 return InkWell(
                   onTap: () {
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    UtilsMidiaSelect.exibirOpcoesMidia(context, tiposMidia,
-                        (ItemMidia itemMidia) {
-                      controller.midia.add(itemMidia);
-                      mediaAdded?.call(itemMidia);
-                    });
+                    onAdd(context);
                   },
                   child: Center(
                     child: Column(
@@ -102,12 +99,7 @@ class SeletorMidiaWidget extends StatelessWidget {
                 heroTag: 'add_midia',
                 child: Icon(Icons.add),
                 onPressed: () {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                  UtilsMidiaSelect.exibirOpcoesMidia(context, tiposMidia,
-                      (ItemMidia itemMidia) {
-                    controller.midia.add(itemMidia);
-                    mediaAdded?.call(itemMidia);
-                  });
+                  onAdd(context);
                 }),
           )
         ],
@@ -115,7 +107,16 @@ class SeletorMidiaWidget extends StatelessWidget {
     );
   }
 
-  _exibirOpcoesItem(BuildContext context, int pos) {
+  void onAdd(BuildContext context) {
+    FocusScope.of(context).requestFocus(FocusNode());
+    UtilsMidiaSelect.exibirOpcoesMidia(context, tiposMidia,
+        (ItemMidia itemMidia) {
+      controller.midia.add(itemMidia);
+      mediaAdded?.call(itemMidia);
+    }, imageQuality: imageQuality, maxHeight: maxHeight, maxWidth: maxWidth);
+  }
+
+  void _exibirOpcoesItem(BuildContext context, int pos) {
     showModalBottomSheet(
         context: context,
         builder: (bottomContext) => BottomSheet(

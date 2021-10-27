@@ -63,23 +63,28 @@ class _VerMidiaPageState extends State<VerMidiaPage> {
     );
   }
 
-  _getItemMidia(ItemMidia item) {
+  Widget _getItemMidia(ItemMidia item) {
     switch (item.tipoMidia) {
       case TipoMidiaEnum.IMAGEM:
         if (item.url.isNullOrBlank && item.path.isNullOrBlank) {
           return Text('Falha ao carregar imagem');
         }
+        Widget errorWidget = Icon(Icons.image_not_supported_outlined);
         return PinchZoomImage(
-          image: item.url.isNullOrBlank
-              ? Image.file(File(item.path))
-              : (UtilsPlatform.isWeb || UtilsPlatform.isWindows)
-                  ? Image.network(item.url)
-                  : CachedNetworkImage(
-                      imageUrl: item.url,
-                      fit: BoxFit.contain,
-                      placeholder: (_, url) =>
-                          Center(child: CircularProgressIndicator()),
-                    ),
+          image:
+              item.path?.isNullOrBlank == false && File(item.path).existsSync()
+                  ? Image.file(File(item.path),
+                      errorBuilder: (_, obj, stack) => errorWidget)
+                  : (UtilsPlatform.isWeb || UtilsPlatform.isWindows)
+                      ? Image.network(item.url,
+                          errorBuilder: (_, obj, stack) => errorWidget)
+                      : CachedNetworkImage(
+                          imageUrl: item.url,
+                          fit: BoxFit.contain,
+                          errorWidget: (_, s, d) => errorWidget,
+                          placeholder: (_, url) =>
+                              Center(child: CircularProgressIndicator()),
+                        ),
         );
       case TipoMidiaEnum.VIDEO:
         return Text(

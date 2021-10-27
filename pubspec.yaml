@@ -9,6 +9,10 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  #flutter_luban: 0.1.1
+    # git:
+    #   ref: 922f5e0b255145e9b69157164100e21256a35620
+    #   url: https://github.com/ReniDelonzek/flutter_luban.git
   file_picker_cross: ^4.2.2
   msk_utils: ^0.0.3
   image_picker: ^0.6.7+22
@@ -18,6 +22,7 @@ dependencies:
   cached_network_image: ^2.2.0+1
   mobx: ^1.1.0
   bloc_pattern: ^2.5.1
+  path_provider: ^2.0.5
   flutter:
     sdk: flutter
 
