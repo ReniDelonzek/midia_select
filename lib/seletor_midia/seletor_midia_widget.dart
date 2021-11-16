@@ -18,6 +18,8 @@ class SeletorMidiaWidget extends StatelessWidget {
   final Function(ItemMidia)? mediaAdded;
   final Function(int)? mediaExcluded;
   final int imageQuality;
+  final List<Widget> Function(int index, BuildContext)? extraImageOptons;
+  final Widget Function(int index)? customItemMidia;
 
   const SeletorMidiaWidget(this.controller,
       {this.maxWidth = 1200,
@@ -26,7 +28,9 @@ class SeletorMidiaWidget extends StatelessWidget {
       this.tiposMidia = const [TipoMidiaEnum.IMAGEM],
       this.mediaAdded,
       this.mediaExcluded,
-      this.imageQuality = 85});
+      this.imageQuality = 85,
+      this.extraImageOptons,
+      this.customItemMidia});
 
   @override
   Widget build(BuildContext context) {
@@ -82,9 +86,15 @@ class SeletorMidiaWidget extends StatelessWidget {
                               //Só exibe se não estiver deletado
                               ? Hero(
                                   tag: index,
-                                  child: ItemMidiaWidget(
-                                      controller.midia[index],
-                                      () => _exibirOpcoesItem(context, index)),
+                                  child: customItemMidia != null
+                                      ? InkWell(
+                                          child: customItemMidia!(index),
+                                          onTap: () =>
+                                              _exibirOpcoesItem(context, index))
+                                      : ItemMidiaWidget(
+                                          controller.midia[index],
+                                          () => _exibirOpcoesItem(
+                                              context, index)),
                                 )
                               //case esteja, apenas deixa um container vazio
                               : Container());
@@ -152,7 +162,7 @@ class SeletorMidiaWidget extends StatelessWidget {
                       Navigator.pop(bottomContext);
                     },
                   )
-                ],
+                ]..addAll(extraImageOptons?.call(pos, bottomContext) ?? []),
               ),
             ));
   }
