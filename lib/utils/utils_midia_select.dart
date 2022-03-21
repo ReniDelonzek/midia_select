@@ -2,7 +2,7 @@ import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:midia_select/models/item_midia.dart';
-import 'package:msk_utils/utils/utils_platform.dart';
+import 'package:msk_utils/msk_utils.dart';
 import 'package:path/path.dart';
 
 class UtilsMidiaSelect {
@@ -36,7 +36,7 @@ class UtilsMidiaSelect {
       ItemMidia item = ItemMidia();
       item.strings = Map();
       if (path != null) {
-        item.strings!['file'] = basename(path);
+        item.strings['file'] = basename(path);
       }
       item.path = path;
       item.url = url;

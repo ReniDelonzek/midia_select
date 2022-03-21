@@ -5,7 +5,6 @@ import 'package:midia_select/models/item_midia.dart';
 import 'package:midia_select/modules/ver_midia/ver_midia_module.dart';
 import 'package:midia_select/utils/utils_midia_select.dart';
 import 'package:msk_utils/msk_utils.dart';
-import 'package:msk_utils/utils/navigation.dart';
 
 import 'seletor_midia_controller.dart';
 
@@ -51,7 +50,7 @@ class SeletorMidiaWidget extends StatelessWidget {
             height: 205,
             child: Observer(builder: (_) {
               if (controller.midia
-                  .where((element) => !element.deletado)
+                  .where((element) => !element.isDeleted)
                   .isEmpty) {
                 //caso a lista esteja vazia ou, todos os componentes estejam deletados
                 return InkWell(
@@ -82,7 +81,7 @@ class SeletorMidiaWidget extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (_, index) {
                       return Observer(
-                          builder: (_) => !controller.midia[index].deletado
+                          builder: (_) => !controller.midia[index].isDeleted
                               //Só exibe se não estiver deletado
                               ? Hero(
                                   tag: index,
@@ -140,11 +139,11 @@ class SeletorMidiaWidget extends StatelessWidget {
                     onTap: () {
                       Navigator.pop(bottomContext);
                       List<ItemMidia> itens = controller.midia
-                          .where((element) => !element.deletado)
+                          .where((element) => !element.isDeleted)
                           .toList();
                       int numDeletadosAteIndice = (controller.midia
                           .sublist(0, pos)
-                          .where((element) => element.deletado)
+                          .where((element) => element.isDeleted)
                           .toList()
                           .length);
                       Navigation.push(
@@ -157,7 +156,7 @@ class SeletorMidiaWidget extends StatelessWidget {
                     title: Text('Remover'),
                     leading: Icon(Icons.close),
                     onTap: () {
-                      controller.midia[pos].deletado = true;
+                      controller.midia[pos].isDeleted = true;
                       mediaExcluded?.call(pos);
                       Navigator.pop(bottomContext);
                     },

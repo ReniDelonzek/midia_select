@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:msk_utils/models/item_select.dart';
+import 'package:msk_utils/msk_utils.dart';
 
 part 'item_midia.g.dart';
 

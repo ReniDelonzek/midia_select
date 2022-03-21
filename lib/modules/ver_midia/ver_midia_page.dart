@@ -4,8 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:midia_select/models/item_midia.dart';
-import 'package:msk_utils/extensions/string.dart';
-import 'package:msk_utils/utils/utils_platform.dart';
+import 'package:msk_utils/msk_utils.dart';
 import 'package:pinch_zoom_image_last/pinch_zoom_image_last.dart';
 
 import 'ver_midia_controller.dart';

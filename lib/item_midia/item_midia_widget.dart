@@ -42,7 +42,7 @@ class ItemMidiaWidget extends StatelessWidget {
                       Container(
                         width: width,
                         height: height,
-                        color: controller.item!.deletado == true
+                        color: controller.item!.isDeleted == true
                             ? Colors.white70
                             : Colors.transparent,
                       ),
@@ -52,14 +52,14 @@ class ItemMidiaWidget extends StatelessWidget {
                     child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          controller.item!.deletado
+                          controller.item!.isDeleted
                               ? 'Removida'
-                              : controller.item!.strings!.values.firstOrNull ??
+                              : controller.item!.strings.values.firstOrNull ??
                                   '',
                           overflow: TextOverflow.clip,
                           maxLines: 2,
                           textAlign: TextAlign.center,
-                          style: controller.item!.deletado
+                          style: controller.item!.isDeleted
                               ? TextStyle(color: Colors.red)
                               : null,
                         )),
