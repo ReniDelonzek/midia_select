@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   file_picker_cross: ^4.4.2
-  msk_utils: ^1.0.2
+  msk_utils: ^1.0.3
   image_picker: ^0.8.3+2
   flutter_mobx: ^2.0.2
   pinch_zoom_image_last: ^0.4.1
