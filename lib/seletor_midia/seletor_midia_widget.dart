@@ -19,6 +19,7 @@ class SeletorMidiaWidget extends StatelessWidget {
   final int imageQuality;
   final List<Widget> Function(int index, BuildContext)? extraImageOptons;
   final Widget Function(int index)? customItemMidia;
+  final Widget? customEmptyList;
 
   const SeletorMidiaWidget(this.controller,
       {this.maxWidth = 1200,
@@ -29,7 +30,8 @@ class SeletorMidiaWidget extends StatelessWidget {
       this.mediaExcluded,
       this.imageQuality = 85,
       this.extraImageOptons,
-      this.customItemMidia});
+      this.customItemMidia,
+      this.customEmptyList});
 
   @override
   Widget build(BuildContext context) {
@@ -57,22 +59,23 @@ class SeletorMidiaWidget extends StatelessWidget {
                   onTap: () {
                     onAdd(context);
                   },
-                  child: Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Image.asset(
-                              'imagens/add_files.png',
-                              width: 100,
-                              package: 'msk_widgets',
-                            )),
-                        Text("Toque em '+' para adicionar arquivos"),
-                      ],
-                    ),
-                  ),
+                  child: customEmptyList ??
+                      Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Image.asset(
+                                  'imagens/add_files.png',
+                                  width: 100,
+                                  package: 'msk_widgets',
+                                )),
+                            Text("Toque em '+' para adicionar arquivos"),
+                          ],
+                        ),
+                      ),
                 );
               } else {
                 return ListView.builder(
