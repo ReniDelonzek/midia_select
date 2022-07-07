@@ -4,26 +4,30 @@ import 'package:msk_utils/msk_utils.dart';
 part 'item_midia.g.dart';
 
 class ItemMidia extends _ItemMidia with _$ItemMidia {
-  ItemMidia(
-      {String? url,
-      String? path,
-      TipoMidiaEnum tipoMidia = TipoMidiaEnum.IMAGEM,
-      dynamic controlador})
-      : super(
+  ItemMidia({
+    String? url,
+    String? path,
+    TipoMidiaEnum tipoMidia = TipoMidiaEnum.IMAGEM,
+    dynamic controlador,
+    String? fileName,
+  }) : super(
             path: path,
             url: url,
             tipoMidia: tipoMidia,
-            controlador: controlador);
+            controlador: controlador,
+            fileName: fileName);
 }
 
 abstract class _ItemMidia extends ItemSelect with Store {
   String? url;
   String? path;
+  String? fileName;
   TipoMidiaEnum tipoMidia;
   dynamic controlador;
   _ItemMidia(
       {this.path,
       this.url,
+      this.fileName,
       this.tipoMidia = TipoMidiaEnum.IMAGEM,
       this.controlador});
 }

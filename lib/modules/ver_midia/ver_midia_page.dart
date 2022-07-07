@@ -58,7 +58,19 @@ class _VerMidiaPageState extends State<VerMidiaPage> {
                     child: Container(
                         child: Hero(
                       tag: realIndex,
-                      child: _getItemMidia(_controller.itens[realIndex]),
+                      child: Column(children: [
+                        Expanded(
+                            child: _getItemMidia(_controller.itens[realIndex])),
+                        if (!_controller
+                            .itens[realIndex].fileName.isNullOrBlank)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 16),
+                            child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                    _controller.itens[realIndex].fileName!)),
+                          )
+                      ]),
                     )),
                   );
                 }),
@@ -100,23 +112,6 @@ class _VerMidiaPageState extends State<VerMidiaPage> {
         );
       case TipoMidiaEnum.AUDIO:
         {
-          // //precisa de revisao
-          // if (item.controlador == null) {
-          //   VideoPlayerController _videoPlayerController1 =
-          //       VideoPlayerController.network(item.url);
-          //   ChewieAudioController _chewieAudioController =
-          //       ChewieAudioController(
-          //           videoPlayerController: _videoPlayerController1,
-          //           autoPlay: true,
-          //           looping: true);
-          //   item.controlador = _chewieAudioController;
-          // }
-          // return Center(
-          //   child: ChewieAudio(
-          //     controller: item.controlador,
-          //   ),
-          // );
-
           return Text(
             'Não implementado',
             style: TextStyle(color: Colors.white),
