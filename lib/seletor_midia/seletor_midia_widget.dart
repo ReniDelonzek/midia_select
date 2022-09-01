@@ -159,13 +159,34 @@ class SeletorMidiaWidget extends StatelessWidget {
                     title: Text('Remover'),
                     leading: Icon(Icons.close),
                     onTap: () {
-                      controller.midia[pos].isDeleted = true;
-                      mediaExcluded?.call(pos);
                       Navigator.pop(bottomContext);
+                      _showDialogConfirmRemove(context, pos);
                     },
                   )
                 ]..addAll(extraImageOptons?.call(pos, bottomContext) ?? []),
               ),
+            ));
+  }
+
+  void _showDialogConfirmRemove(BuildContext context, int index) {
+    showDialog(
+        context: context,
+        builder: (alertContext) => AlertDialog(
+              title: Text('Remover o fardo?'),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(alertContext);
+                    },
+                    child: Text('Cancelar')),
+                TextButton(
+                    onPressed: () {
+                      controller.midia[index].isDeleted = true;
+                      mediaExcluded?.call(index);
+                      Navigator.pop(alertContext);
+                    },
+                    child: Text('Confirmar')),
+              ],
             ));
   }
 }
