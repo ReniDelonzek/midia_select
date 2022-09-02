@@ -172,7 +172,7 @@ class SeletorMidiaWidget extends StatelessWidget {
     showDialog(
         context: context,
         builder: (alertContext) => AlertDialog(
-              title: Text('Remover o fardo?'),
+              title: Text('Remover a foto?'),
               actions: [
                 TextButton(
                     onPressed: () {
