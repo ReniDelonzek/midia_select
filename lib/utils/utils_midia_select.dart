@@ -1,7 +1,9 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:midia_select/models/item_midia.dart';
+import 'package:midia_select/modules/capture_photo/capture_photo_page.dart';
 import 'package:msk_utils/msk_utils.dart';
 import 'package:path/path.dart';
 
@@ -142,6 +144,22 @@ class UtilsMidiaSelect {
                         if (Navigator.canPop(context)) {
                           Navigator.pop(context);
                         }
+                        if (UtilsPlatform.isAndroid) {
+                          var androidInfo =
+                              await DeviceInfoPlugin().androidInfo;
+                          if ((androidInfo.version.sdkInt ?? 0) >= 21) {
+                            var res = await Navigation.push(
+                                context, CapturePhotoPage());
+                            if (res != null) {
+                              ItemMidia? item = getItemMidiaImage(path: res);
+                              if (item != null) {
+                                midiaAdded.call(item);
+                              }
+                            }
+                            return;
+                          }
+                        }
+
                         XFile? image = await ImagePicker().pickImage(
                             source: ImageSource.camera,
                             maxWidth: maxWidth,
