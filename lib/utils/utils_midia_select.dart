@@ -132,7 +132,7 @@ class UtilsMidiaSelect {
     } else {
       showDialog(
           context: context,
-          builder: (context) => AlertDialog(
+          builder: (alertContext) => AlertDialog(
                 title: Text('Selecione a forma'),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -141,13 +141,20 @@ class UtilsMidiaSelect {
                       title: Text('Câmera'),
                       leading: Icon(Icons.camera),
                       onTap: () async {
-                        if (Navigator.canPop(context)) {
-                          Navigator.pop(context);
+                        if (Navigator.canPop(alertContext)) {
+                          Navigator.pop(alertContext);
                         }
                         if (UtilsPlatform.isAndroid) {
                           var androidInfo =
                               await DeviceInfoPlugin().androidInfo;
                           if ((androidInfo.version.sdkInt ?? 0) >= 21) {
+                            try {
+                              /// Caso o teclado esteja aberto, fecha ele e da um delay antes de abrir a câmera, para evitar problemas com a câmera
+                              if (FocusScope.of(context).isFirstFocus) {
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                await Future.delayed(Duration(seconds: 1));
+                              }
+                            } catch (_) {}
                             var res = await Navigation.push(
                                 context, CapturePhotoPage());
                             if (res != null) {
@@ -177,8 +184,8 @@ class UtilsMidiaSelect {
                       title: Text('Galeria'),
                       leading: Icon(Icons.image),
                       onTap: () async {
-                        if (Navigator.canPop(context)) {
-                          Navigator.pop(context);
+                        if (Navigator.canPop(alertContext)) {
+                          Navigator.pop(alertContext);
                         }
                         XFile? image = await ImagePicker().pickImage(
                             source: ImageSource.gallery,
