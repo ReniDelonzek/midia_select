@@ -165,9 +165,11 @@ class UtilsMidiaSelect {
                             maxWidth: maxWidth,
                             maxHeight: maxHeight,
                             imageQuality: imageQuality);
-                        ItemMidia? item = getItemMidiaImage(path: image?.path);
-                        if (item != null) {
-                          midiaAdded.call(item);
+                        if (image != null) {
+                          ItemMidia? item = getItemMidiaImage(path: image.path);
+                          if (item != null) {
+                            midiaAdded.call(item);
+                          }
                         }
                       },
                     ),
@@ -183,10 +185,11 @@ class UtilsMidiaSelect {
                             maxWidth: maxWidth,
                             maxHeight: maxHeight,
                             imageQuality: imageQuality);
-
-                        ItemMidia? item = getItemMidiaImage(path: image?.path);
-                        if (item != null) {
-                          midiaAdded.call(item);
+                        if (image != null) {
+                          ItemMidia? item = getItemMidiaImage(path: image.path);
+                          if (item != null) {
+                            midiaAdded.call(item);
+                          }
                         }
                       },
                     ),
@@ -232,10 +235,11 @@ class UtilsMidiaSelect {
                         }
                         XFile? video = await ImagePicker()
                             .pickVideo(source: ImageSource.camera);
-                        ItemMidia? item = getItemMidiaVideo(path: video?.path);
-
-                        if (item != null) {
-                          midiaAdded.call(item);
+                        if (video != null) {
+                          ItemMidia? item = getItemMidiaVideo(path: video.path);
+                          if (item != null) {
+                            midiaAdded.call(item);
+                          }
                         }
                       },
                     ),
@@ -248,9 +252,11 @@ class UtilsMidiaSelect {
                         }
                         XFile? video = await ImagePicker()
                             .pickVideo(source: ImageSource.gallery);
-                        ItemMidia? item = getItemMidiaVideo(path: video?.path);
-                        if (item != null) {
-                          midiaAdded.call(item);
+                        if (video != null) {
+                          ItemMidia? item = getItemMidiaVideo(path: video.path);
+                          if (item != null) {
+                            midiaAdded.call(item);
+                          }
                         }
                       },
                     ),
